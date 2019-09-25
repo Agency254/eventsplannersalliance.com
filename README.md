@@ -60,9 +60,9 @@ DEBUG=<boolean>
 Install dependancies that will create an environment for the app to run
 `pip install -r requirements.txt`
 
-#### Make and run migrations
+#### Run migrations
 ```bash
-python3.6 manage.py makemigrations && python3.6 manage.py migrate
+python3.6 manage.py migrate
 ```
 
 #### Run the app
