@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container" style="padding-top: 160px;">
+    <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
         <h2>{{ user.get_full_name }}</h2>
         <form action="/accounts/profile/update/" method="post" enctype="multipart/form-data">
             {% csrf_token %}

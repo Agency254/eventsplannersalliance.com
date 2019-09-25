@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for obj in object_list %}
+    <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
+        {% for obj in object_list %}
 
-        {{ obj.title}} <br/>
+            {{ obj.title}} <br/>
 
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 {% endblock %}
