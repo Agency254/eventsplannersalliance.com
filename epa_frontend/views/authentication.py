@@ -35,10 +35,10 @@ def update_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, ('Your profile was successfully updated!'))
+            messages.success(request, 'Your profile was successfully updated!')
             return redirect('view_profile')
         else:
-            messages.error(request, ('Please correct the error below.'))
+            messages.error(request, 'Please correct the error below.')
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
@@ -68,13 +68,13 @@ def create_merchant(request):
             merchant_form.user_profile_id = current_user.id
             merchant_form.created_at = datetime.now
             merchant_form.save()
-            messages.success(request, ('The new merchant has been created succesfully'))
+            messages.success(request, 'The new merchant has been created succesfully')
             return redirect('properties')
         else:
             messages.error(request, 'please correct the mistakes below')
     else:
         merchant_form = MerchantForm(request.POST)
-    return render(request, 'merchants/merchant_creation.html', {
+    return render(request, 'merchants/new_merchant.html', {
         "merchant_form": merchant_form,
         "current_merchants": current_user_merchants
     })
@@ -90,10 +90,10 @@ def update_merchant(request, pk):
         merchant_form = MerchantForm(request.POST, instance=current_merchant[0])
         if merchant_form.is_valid():
             merchant_form.save()
-            messages.success(request, ('Your merchant was successfully updated!'))
+            messages.success(request, 'Your merchant was successfully updated!')
             return redirect('view_merchant', pk=current_merchant[0].id)
         else:
-            messages.error(request, ('Please fix the errors below!'))
+            messages.error(request, 'Please fix the errors below!')
     else:
         merchant_form = MerchantForm(instance=current_merchant[0])
     return render(request, 'merchants/update_merchant.html', {
