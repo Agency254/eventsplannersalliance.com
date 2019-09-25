@@ -74,7 +74,7 @@ def create_merchant(request):
             messages.error(request, 'please correct the mistakes below')
     else:
         merchant_form = MerchantForm(request.POST)
-    return render(request, 'registration/merchant_creation.html', {
+    return render(request, 'merchants/merchant_creation.html', {
         "merchant_form": merchant_form,
         "current_merchants": current_user_merchants
     })
@@ -96,7 +96,7 @@ def update_merchant(request, pk):
             messages.error(request, ('Please fix the errors below!'))
     else:
         merchant_form = MerchantForm(instance=current_merchant[0])
-    return render(request, 'registration/update_merchant.html', {
+    return render(request, 'merchants/update_merchant.html', {
         "merchant_form": merchant_form,
         "current_merchant": current_merchant[0]
     })
@@ -107,8 +107,21 @@ def view_merchant(request, pk):
     user_creation_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
     merchant = Merchants.objects.get(pk=pk)
-    return render(request, 'registration/merchant.html', {
+    return render(request, 'merchants/merchant.html', {
         "merchant": merchant,
+        "user_authentication_form": user_authentication_form,
+        "user_creation_form": user_creation_form,
+        "current_user": current_user
+    })
+
+
+def view_merchants(request):
+    current_user = request.user
+    user_creation_form = UserCreationForm()
+    user_authentication_form = AuthenticationForm()
+    merchants = Merchants.objects.all()
+    return render(request, 'merchants/merchants.html', {
+        "merchants": merchants,
         "user_authentication_form": user_authentication_form,
         "user_creation_form": user_creation_form,
         "current_user": current_user

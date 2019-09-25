@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
+        <h2>All our merchants displayed in one place</h2>
+        <div class="row">
+            {% for merchant in merchants %}
+                <div class="col">
+                        <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ merchant.merchant_name }}</h5>
+                            <p class="card-text">{{ merchant.merchant_description }}</p>
+                            <a href="/merchant/{{ merchant.id }}" class="card-link">View {{ merchant.merchant_name }}</a>
+                          </div>
+                        </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
