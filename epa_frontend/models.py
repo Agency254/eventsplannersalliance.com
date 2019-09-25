@@ -74,7 +74,7 @@ class Properties(models.Model):
     status = models.CharField(max_length=50, choices=[
         ("booked", "booked"),
         ("available", "available")
-    ])
+    ], default="available")
     created_at = models.DateTimeField()
     location = CountryField(blank_label='(Select Country')
 
