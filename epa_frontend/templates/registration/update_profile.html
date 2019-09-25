@@ -1,41 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>{{ user.get_full_name }}</h2>
-    <form action="/accounts/profile/update/" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col">
-                {% for field in user_form %}
-                    <p>
-                        {{ field.label_tag }}<br>
-                        {{ field }}
-                        {% if field.help_text %}
-                            <small style="color: grey">{{ field.help_text }}</small>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    </p>
-                {% endfor %}
+    <div class="container" style="padding-top: 160px;">
+        <h2>{{ user.get_full_name }}</h2>
+        <form action="/accounts/profile/update/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    {% for field in user_form %}
+                        <p>
+                            {{ field.label_tag }}<br>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small style="color: grey">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="col">
+                    {% for field in profile_form %}
+                        <p>
+                            {{ field.label_tag }}<br>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small style="color: grey">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                    {% endfor %}
+                </div>
             </div>
 
-            <div class="col">
-                {% for field in profile_form %}
-                    <p>
-                        {{ field.label_tag }}<br>
-                        {{ field }}
-                        {% if field.help_text %}
-                            <small style="color: grey">{{ field.help_text }}</small>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    </p>
-                {% endfor %}
-            </div>
-        </div>
-
-        <button class="btn btn-outline-dark" type="submit">Submit</button>
-    </form>
+            <button class="btn btn-outline-dark" type="submit">Update Profile</button>
+        </form>
+    </div>
 {% endblock %}

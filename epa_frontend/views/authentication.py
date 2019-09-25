@@ -28,14 +28,14 @@ def signup(request):
 def update_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, _('Your profile was successfully updated!'))
+            messages.success(request, ('Your profile was successfully updated!'))
             return redirect('view_profile')
         else:
-            messages.error(request, _('Please correct the error below.'))
+            messages.error(request, ('Please correct the error below.'))
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
@@ -47,4 +47,8 @@ def update_profile(request):
 
 def view_profile(request):
     current_user = request.user
-    return render(request, 'registration/profile.html', {"user": current_user})
+    current_user_profile = current_user.profile
+    return render(request, 'registration/profile.html', {
+        "user": current_user,
+        "profile": current_user_profile
+    })

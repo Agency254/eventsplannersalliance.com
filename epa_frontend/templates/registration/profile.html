@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="container" style="padding-top: 160px;">
     <h2>{{ user.get_full_name }}</h2>
     <ul>
       <li>Username: {{ user.username }}</li>
-      <li>Bio: {{ user.profile.location }}</li>
-      <li>Profile Photo: {{ user.profile.birth_date }}</li>
+      <li>Bio: {{ profile.bio }}</li>
     </ul>
+        <img src="{{ profile.user_icon.url }}">
     <a href="/accounts/profile/update" class="btn btn-outline-dark">Update Profile</a>
+    </div>
 {% endblock %}
