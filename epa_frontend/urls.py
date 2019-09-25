@@ -9,4 +9,6 @@ urlpatterns = [
     path('accounts/profile/update/', authentication.update_profile, name='update_profile'),
     path('accounts/signup/', authentication.signup, name='signup'),
     path('accounts/login/', authentication.login, name='login'),
+    path('merchants/new/', authentication.create_merchant, name='create_merchant'),
+
 ]

@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -5,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.shortcuts import render, redirect
 
-from epa_frontend.forms.authentication_forms import UserForm, ProfileForm
+from epa_frontend.forms.authentication_forms import UserForm, ProfileForm, MerchantForm
 
 
 def signup(request):
@@ -51,4 +52,26 @@ def view_profile(request):
     return render(request, 'registration/profile.html', {
         "user": current_user,
         "profile": current_user_profile
+    })
+
+
+@login_required
+def create_merchant(request):
+    current_user = request.user
+    print(current_user.id)
+    if request.method == 'POST':
+        merchant_form = MerchantForm(request.POST)
+
+        if merchant_form.is_valid():
+            merchant_form.user_profile_id = current_user.id
+            merchant_form.created_at = datetime.now
+            merchant_form.save()
+            messages.success(request, ('The new merchant has been created succesfully'))
+            return redirect('properties')
+        else:
+            messages.error(request, 'please correct the mistakes below')
+    else:
+        merchant_form = MerchantForm(request.POST)
+    return render(request, 'registration/merchant_creation.html', {
+        "merchant_form": merchant_form
     })
