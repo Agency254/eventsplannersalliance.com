@@ -7,7 +7,7 @@ from epa_frontend.models import Profile, Merchants, Properties, Orders
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name')
+        fields = ('first_name', 'last_name', 'username')
 
 
 class ProfileForm(forms.ModelForm):
