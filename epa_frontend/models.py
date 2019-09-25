@@ -10,7 +10,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=254)
     bio = models.TextField(max_length=500, null=True, blank=True)
-    user_icon = models.ImageField(null=True, blank=True)
+    user_icon = models.ImageField(null=True, blank=True,upload_to='images/')
     country_code = CountryField(blank_label='(select country)')
 
 
@@ -36,7 +36,7 @@ class Merchants(models.Model):
 class Properties(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    images = models.ImageField()
+    images = models.ImageField(upload_to='properties/')
     property_type = models.CharField(max_length=30) #eg mansion, villa, bungallow
     merchant_id = models.ForeignKey(Merchants, on_delete=models.CASCADE, related_name="merchant_details")
     price = MoneyField(max_digits=14, decimal_places=2, default_currency='KES')
@@ -45,6 +45,7 @@ class Properties(models.Model):
         ("available", "available")
     ])
     created_at = models.DateTimeField()
+    location = CountryField(blank_label='(Select Country')
 
 
 class Orders(models.Model):
