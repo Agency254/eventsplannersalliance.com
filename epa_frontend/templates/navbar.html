@@ -12,27 +12,45 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="margin-right: 0px!important;">
-                <select class="custom-select">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="margin-right: 0px!important; width: 250px; height: 50px;">
+                <select class="custom-select" style="height: 50px;">
                   <option selected>Open this select menu</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
                 </select>
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit"  style="height: 50px;">Search</button>
             </form>
           </li>
-
             <li class="nav-item">
+                <button class="btn btn-outline-light my-2 my-sm-0" onclick="window.location.href = '/merchants/new/';" style="margin-left: 15px; margin-top: .3125rem!important;">List your property</button>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item" style="padding-top: .3125rem;">
+                    <a class="nav-item nav-link text-white" href="/accounts/logout/">LogOut</a>
+{#                    <button class="btn btn-outline-light my-2 my-sm-0" onclick="window.location.href = '';">LogOut</button>#}
+                </li>
+                <li class="nav-item" style="padding-top: .3125rem;">
+                    <a class="nav-link text-white" href="/accounts/profile">{{ user.username }}</a>
+                </li>
+            {%  else %}
+            <li class="nav-item"  style="padding-top: .3125rem;">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Sign In
                 </button>
             </li>
-            <li class="nav-item">
-                <button class="btn btn-outline-light my-2 my-sm-0" onclick="window.location.href = '/merchants/new/';">List your property</button>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="/accounts/profile">Hi {{ user.username }}</a>
+            {% endif %}
+            <li class="nav-item" style="padding-top: .3125rem;">
+                <a class="nav-link text-white" href="#">
+                    <svg class="icon icon--cart" viewBox="0 0 27 24" role="presentation" style="width: 27px; height: 24px;">
+                      <g transform="translate(0 1)" stroke-width="2" stroke="currentColor" fill="none" fill-rule="evenodd">
+                         <circle stroke-linecap="square" cx="11" cy="20" r="2"></circle>
+                         <circle stroke-linecap="square" cx="22" cy="20" r="2"></circle>
+                         <path d="M7.31 5h18.27l-1.44 10H9.78L6.22 0H0"></path>
+                      </g>
+                   </svg>
+                    <span class="header__cart-count" style="display: inline-flex; right: -14px; top: -7px; align-items: center; justify-content: center; height: 20px; min-width: 20px; padding: 4px; font-size: 13px; font-weight: 500; text-align: center; background: #00badb; color: #fff; border-radius: 1.75em; transition: -webkit-transform 0.35s ease-in-out; will-change: transform; -webkit-transform: scale(1.01); transform: scale(1.01); z-index: 1;">123</span>
+                </a>
             </li>
         </ul>
 
