@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
+        <h2>{{ current_merchant.merchant_name }}</h2>
+
+        <form action="/merchant/{{ current_merchant.id }}/update/" method="post" >
+            {% csrf_token %}
+            {% for field in merchant_form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small style="color: grey">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {% endif %}
+                </p>
+            {% endfor %}
+            <button class="btn btn-outline-dark" type="submit">Update Merchant</button>
+
+        </form>
+
+    </div>
+{% endblock %}

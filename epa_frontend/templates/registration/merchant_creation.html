@@ -1,22 +1,43 @@
 {%  extends 'base.html' %}
 
 {% block content %}
-<div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
-    <form method="post">
-        {% csrf_token %}
-        {% for field in merchant_form %}
-            <p>
-                {{ field.label_tag }}<br>
-                {{ field }}
-                {% if field.help_text %}
-                    <small style="color: grey">{{ field.help_text }}</small>
+    <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
+
+        <div class="row">
+            <div class="col">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in merchant_form %}
+                        <p>
+                            {{ field.label_tag }}<br>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small style="color: grey">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% if error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endif %}
+                        </p>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-outline-dark">Create merchant</button>
+                </form>
+            </div>
+            <div class="col">
+                {% if current_merchants %}
+                    <h2>Your Merchants</h2>
+                    {% for merchant in current_merchants %}
+                        <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ merchant.merchant_name }}</h5>
+                            <p class="card-text">{{ merchant.merchant_description }}</p>
+                            <a href="/merchant/{{ merchant.id }}" class="card-link">View {{ merchant.merchant_name }}</a>
+                          </div>
+                        </div>
+                    {% endfor %}
+                    <button class="btn btn-outline-dark">Create properties</button>
                 {% endif %}
-                {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                {% endfor %}
-            </p>
-        {% endfor %}
-        <button type="submit">Create Merchant</button>
-    </form>
-</div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

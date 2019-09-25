@@ -10,5 +10,7 @@ urlpatterns = [
     path('accounts/signup/', authentication.signup, name='signup'),
     path('accounts/login/', authentication.login, name='login'),
     path('merchants/new/', authentication.create_merchant, name='create_merchant'),
+    path('merchant/<int:pk>/', authentication.view_merchant, name='view_merchant'),
+    path('merchant/<int:pk>/update/', authentication.update_merchant, name='update_merchant'),
 
 ]
