@@ -4,13 +4,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_countries.fields import CountryField
 from djmoney.models.fields import MoneyField
+from datetime import datetime
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=254)
     bio = models.TextField(max_length=500, null=True, blank=True)
-    user_icon = models.ImageField(null=True, blank=True,upload_to='images/')
+    user_icon = models.ImageField(null=True, blank=True, upload_to='images/')
     country_code = CountryField(blank_label='(select country)')
 
 
@@ -33,12 +34,21 @@ class Merchants(models.Model):
     admin_id = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="user_profile")
 
 
+class PropertyType(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=50)
+    images = models.ImageField(upload_to='property_type/')
+    merchant_id = models.ForeignKey(Merchants, on_delete=models.CASCADE, related_name="merchant_information")
+
+
 class Properties(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     images = models.ImageField(upload_to='properties/')
-    property_type = models.CharField(max_length=30) #eg mansion, villa, bungallow
     merchant_id = models.ForeignKey(Merchants, on_delete=models.CASCADE, related_name="merchant_details")
+    property_type_id = models.ForeignKey(PropertyType, on_delete=models.CASCADE,
+                                         related_name="property_type_information")
     price = MoneyField(max_digits=14, decimal_places=2, default_currency='KES')
     status = models.CharField(max_length=50, choices=[
         ("booked", "booked"),
@@ -61,4 +71,5 @@ class Orders(models.Model):
 class OrderItems(models.Model):
     order_id = models.ForeignKey(Orders, on_delete=models.CASCADE, related_name="order_details")
     property_id = models.ForeignKey(Properties, on_delete=models.CASCADE, related_name="property_details")
-    duration_of_stay = models.DateTimeField()
+    start_of_stay = models.DateTimeField(default=datetime.now)
+    end_of_stay = models.DateTimeField(default=datetime.now)
