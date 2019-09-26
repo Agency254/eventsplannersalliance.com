@@ -9,10 +9,10 @@ from datetime import datetime
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField(max_length=254)
-    bio = models.TextField(max_length=500, null=True, blank=True)
-    user_icon = models.ImageField(null=True, blank=True, upload_to='images/')
-    country_code = CountryField(blank_label='(select country)')
+    email = models.EmailField(max_length=254, default='example@email.com')
+    bio = models.TextField(max_length=500, null=True, blank=True, default='enter catchy bio')
+    user_icon = models.ImageField(null=True, blank=True, upload_to='images/', default="images/nerd.png")
+    country_code = CountryField(blank_label='(select country)', default='KE')
 
 
 @receiver(post_save, sender=User)
@@ -41,11 +41,10 @@ class Merchants(models.Model):
     )
 
 
-class PropertyType(models.Model):
+class EventsType(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=50)
-    images = models.ImageField(upload_to='property_type/')
     merchant_id = models.ForeignKey(
         Merchants,
         on_delete=models.CASCADE,
@@ -54,9 +53,10 @@ class PropertyType(models.Model):
     )
 
 
-class Properties(models.Model):
+class Events(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
+    description = models.CharField(max_length=1000)
     images = models.ImageField(upload_to='properties/')
     merchant_id = models.ForeignKey(
         Merchants,
@@ -64,18 +64,16 @@ class Properties(models.Model):
         related_name="merchant_details",
         db_column='merchant_id'
     )
-    property_type_id = models.ForeignKey(
-        PropertyType,
+    event_type_id = models.ForeignKey(
+        EventsType,
         on_delete=models.CASCADE,
-        related_name="property_type_information",
-        db_column='property_type_id'
+        related_name="event_type_information",
+        db_column='event_type_id'
     )
     price = MoneyField(max_digits=14, decimal_places=2, default_currency='KES')
-    status = models.CharField(max_length=50, choices=[
-        ("booked", "booked"),
-        ("available", "available")
-    ], default="available")
-    created_at = models.DateTimeField()
+    number_of_tickets = models.IntegerField(default=0)
+    tickets_sold = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=datetime.now)
     location = CountryField(blank_label='(Select Country')
 
 
@@ -91,16 +89,17 @@ class Orders(models.Model):
         ("paid", "paid"),
         ("unpaid", "unpaid")
     ])
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(default=datetime.now)
 
 
 class OrderItems(models.Model):
     order = models.ForeignKey(Orders, on_delete=models.CASCADE, related_name="order_details")
-    property_id = models.ForeignKey(
-        Properties,
+    event_id = models.ForeignKey(
+        Events,
         on_delete=models.CASCADE,
-        related_name="property_details",
-        db_column='property_id'
+        related_name="event_details",
+        db_column='event_id',
+        default=0
     )
     start_of_stay = models.DateTimeField(default=datetime.now)
     end_of_stay = models.DateTimeField(default=datetime.now)
