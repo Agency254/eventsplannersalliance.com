@@ -13,5 +13,5 @@ urlpatterns = [
     path('merchants/', authentication.view_merchants, name='view_merchants'),
     path('merchant/<int:pk>/', authentication.view_merchant, name='view_merchant'),
     path('merchant/<int:pk>/update/', authentication.update_merchant, name='update_merchant'),
-
+    path('properties/', views.view_properties, name='view_properties'),
 ]
