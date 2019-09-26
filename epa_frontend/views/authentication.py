@@ -7,7 +7,7 @@ from django.db import transaction
 from django.shortcuts import render, redirect
 
 from epa_frontend.forms.authentication_forms import UserForm, ProfileForm, MerchantForm
-from epa_frontend.models import Merchants
+from epa_frontend.models import Merchants, Properties
 
 
 def signup(request):
@@ -107,8 +107,10 @@ def view_merchant(request, pk):
     user_creation_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
     merchant = Merchants.objects.get(pk=pk)
+    properties = Properties.objects.filter(merchant_id=merchant.id)
     return render(request, 'merchants/merchant.html', {
         "merchant": merchant,
+        "properties": properties,
         "user_authentication_form": user_authentication_form,
         "user_creation_form": user_creation_form,
         "current_user": current_user
