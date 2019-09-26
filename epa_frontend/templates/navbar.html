@@ -1,6 +1,10 @@
 {% load crispy_forms_tags %}
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top scrolling-navbar" style="padding: 2rem 1rem;">
+<style type="text/css">
+    .dropdown:hover>.dropdown-menu {
+  display: block;
+}
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top scrolling-navbar" style="padding: 2rem 1rem; background: #1e2d7d!important;">
     <div class="container" style="padding: 0 0;">
 
       <a class="navbar-brand" href="/">Events Alliance</a>
@@ -61,15 +65,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="margin-top: 103px;">
     <div class="container" style="padding: 0 0;">
 
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="/properties/">All Properties</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <div class="dropdown">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown link
+              <a class="nav-item nav-link dropdown-toggle" href="/property-types/" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Property Types
               </a>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -78,8 +82,8 @@
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
             </div>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
+          <a class="nav-item nav-link" href="/merchants/">Merchants</a>
+          <a class="nav-item nav-link" href="#">About</a>
           <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </div>
       </div>
