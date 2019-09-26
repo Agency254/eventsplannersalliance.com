@@ -25,15 +25,17 @@
             <div class="col">
                 {% if current_merchants %}
                     <h2>Your Merchants</h2>
-                    {% for merchant in current_merchants %}
-                        <div class="card" style="width: 18rem;">
-                          <div class="card-body">
-                            <h5 class="card-title">{{ merchant.merchant_name }}</h5>
-                            <p class="card-text">{{ merchant.merchant_description }}</p>
-                            <a href="/merchant/{{ merchant.id }}" class="card-link">View {{ merchant.merchant_name }}</a>
-                          </div>
-                        </div>
-                    {% endfor %}
+                    <div class="card-deck">
+                        {% for merchant in current_merchants %}
+                            <div class="card" style="width: 18rem;">
+                              <div class="card-body">
+                                <h5 class="card-title">{{ merchant.merchant_name }}</h5>
+                                <p class="card-text">{{ merchant.merchant_description }}</p>
+                                <a href="/merchant/{{ merchant.id }}" class="card-link">View {{ merchant.merchant_name }}</a>
+                              </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                     <button class="btn btn-outline-dark">Create properties</button>
                 {% endif %}
 
