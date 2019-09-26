@@ -13,5 +13,8 @@ urlpatterns = [
     path('merchants/', authentication.view_merchants, name='view_merchants'),
     path('merchant/<int:pk>/', authentication.view_merchant, name='view_merchant'),
     path('merchant/<int:pk>/update/', authentication.update_merchant, name='update_merchant'),
-    path('properties/', views.view_properties, name='view_properties'),
+    path('events/', views.view_events, name='view_events'),
+    path('about/', views.view_about, name='view_about'),
+    path('event/<int:pk>/', views.view_event, name='view_event'),
+    path('event-type/<int:pk>/', views.view_event_type, name='view_event_type'),
 ]
