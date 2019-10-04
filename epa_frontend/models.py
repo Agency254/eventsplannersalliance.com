@@ -40,6 +40,8 @@ class Merchants(models.Model):
         default=1
     )
 
+    # TODO:think about merchant subscription and how to pay for it
+
 
 class EventsType(models.Model):
     id = models.AutoField(primary_key=True)
@@ -75,6 +77,7 @@ class Events(models.Model):
     tickets_sold = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=datetime.now)
     location = CountryField(blank_label='(Select Country')
+    published = models.BooleanField(default=False)
 
 
 class Orders(models.Model):

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style type="text/css">
+        @media (max-device-width:641px)  {
+
+        }
+    </style>
+    <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
+        <div class="row">
+            <div class="col col">
+                <img src="{{ event.images.url }}" alt="{{ event.name }}" class="rounded float-left img-fluid">
+            </div>
+
+            <div class="col-md-auto">
+                <h2>{{ event.name }}</h2>
+                Merchant: <a href="/merchant/{{ event.merchant_id.id }}">{{ event.merchant_id.merchant_name }}</a> <br>
+                Price: <h3>{{ event.price }}</h3>
+
+                <h1>TODO:// event order form</h1>
+
+            </div>
+        </div>
+        <hr>
+        <h2>Information</h2>
+        <p>{{ event.description }}</p>
+    </div>
+{% endblock %}
