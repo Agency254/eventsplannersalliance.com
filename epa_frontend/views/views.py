@@ -1,13 +1,9 @@
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.db import transaction
-from django.db.models import F
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
-from epa_frontend.forms.authentication_forms import UserForm, ProfileForm
-from epa_frontend.models import Properties, PropertyType
+from epa_frontend.forms.authentication_forms import ProfileForm
+from epa_frontend.models import Events, EventsType
 
 
 def home(request):
@@ -15,24 +11,31 @@ def home(request):
     user_authentication_form = AuthenticationForm()
     profile_form = ProfileForm()
     current_user = User.username
-    property_types = PropertyType.objects.all()
-    properties = Properties.objects.all()
+    events_types = EventsType.objects.all()
+    print(events_types)
+    events = Events.objects.all()
     return render(request, 'index.html', {
         "profile_form": profile_form,
         "user_creation_form": user_creation_form,
         "user_authentication_form": user_authentication_form,
         "current_user": current_user,
-        "property_types": property_types,
-        "properties": properties
+        "events_types": events_types,
+        "events": events
     })
 
 
-def view_properties(request):
-    properties = Properties.objects.all()
-    user_form = UserCreationForm()
+def view_about(request):
+    user_creation_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
-    return render(request, 'properties_and_property_type/properties.html', {
-        "properties": properties,
-        "user_creation_form": user_form,
+    profile_form = ProfileForm()
+    current_user = User.username
+    events_types = EventsType.objects.all()
+    events = Events.objects.all()
+    return render(request, 'about.html', {
+        "profile_form": profile_form,
+        "user_creation_form": user_creation_form,
         "user_authentication_form": user_authentication_form,
+        "current_user": current_user,
+        "events_types": events_types,
+        "events": events
     })
