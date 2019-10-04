@@ -8,7 +8,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ merchant.merchant_name }}</h5>
                     <p class="card-text">{{ merchant.merchant_description }}</p>
-                    <a href="/merchant/{{ merchant.id }}" class="card-link">View {{ merchant.merchant_name }}</a>
+                    <a href="{% url 'view_merchant' pk=merchant.id %}" class="card-link">View {{ merchant.merchant_name }}</a>
                   </div>
                 </div>
             {% endfor %}

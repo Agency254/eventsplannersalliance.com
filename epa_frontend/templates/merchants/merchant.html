@@ -1,21 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
-        <h2>Merchant name <strong>{{ merchant.merchant_name }}</strong></h2>
-        <p>Description: {{ merchant.merchant_description }}</p>
-        <p>Location: {{ merchant.country_code.name }}</p>
+        <div class="row">
+            <div class="col">
+                <h2>Merchant name <strong>{{ merchant.merchant_name }}</strong></h2>
+                <p>Description: {{ merchant.merchant_description }}</p>
+                <p>Location: {{ merchant.country_code.name }}</p>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-dark my-2 my-sm-0" onclick="window.location.href = '{% url 'create_events' %}';">Create event</button>
+
+
+            </div>
+        </div>
         <hr>
-        <h2>These are the properties belonging to {{ merchant.merchant_name }}</h2>
+        <h2>These are the events by {{ merchant.merchant_name }}</h2>
         <div class="card-deck">
-            {% for property in properties %}
-                <div class="card bg-dark text-white">
-                  <img src="{{ property.images.url }}" class="card-img" alt="{{ property.name }}">
-                  <div class="card-img-overlay">
-                    <h5 class="card-title">{{ property.name }}</h5>
-                    <p class="card-text">{{ property.price }}</p>
-                    <p class="card-text">{{ property.status }}</p>
-                    <p class="card-text">{{ property.location.name }}</p>
-                      <img src="{{ property.location.flag }}" alt="{{ property.location.name }}">
+            {% for event in events %}
+                <div class="card" style="width: 18rem;">
+                  <img src="{{ event.images.url }}" class="card-img-top" alt="{ event.name }}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ event.name }}</h5>
+                    <p class="card-text">{{ event.description }}</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ event.price }}</li>
+                    <li class="list-group-item">
+                        {{ event.location.name }}
+                        <img src="{{ property.location.flag }}" alt="{{ property.location.name }}">
+                    </li>
+                    <li class="list-group-item">
+                        No. of tickets: {{ event.number_of_tickets }} <br>
+                        Tickets sold: {{ event.tickets_sold }}
+
+                    </li>
+                  </ul>
+                  <div class="card-body">
+                    <a href="/event/{{ event.id }}" class="card-link">View Details</a>
+                    <a href="#" class="card-link">Add to cart</a>
                   </div>
                 </div>
             {% endfor %}
