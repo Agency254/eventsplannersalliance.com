@@ -27,15 +27,15 @@
             </form>
           </li>
             <li class="nav-item">
-                <button class="btn btn-outline-light my-2 my-sm-0" onclick="window.location.href = '/merchants/new/';" style="margin-left: 15px; margin-top: .3125rem!important;">List your property</button>
+                <button class="btn btn-outline-light my-2 my-sm-0" onclick="window.location.href = '/merchants/new/';" style="margin-left: 15px; margin-top: .3125rem!important;">Start Selling</button>
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item" style="padding-top: .3125rem;">
-                    <a class="nav-item nav-link text-white" href="/accounts/logout/">LogOut</a>
+                    <a class="nav-item nav-link text-white" href="{% url 'login' %}">LogOut</a>
 {#                    <button class="btn btn-outline-light my-2 my-sm-0" onclick="window.location.href = '';">LogOut</button>#}
                 </li>
                 <li class="nav-item" style="padding-top: .3125rem;">
-                    <a class="nav-link text-white" href="/accounts/profile">{{ user.username }}</a>
+                    <a class="nav-link text-white" href="{% url 'view_profile' %}">{{ user.username }}</a>
                 </li>
             {%  else %}
             <li class="nav-item"  style="padding-top: .3125rem;">
@@ -65,26 +65,25 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="margin-top: 103px;">
     <div class="container" style="padding: 0 0;">
 
-      <a class="navbar-brand" href="/properties/">All Properties</a>
+      <a class="navbar-brand" href="/events/">All Events</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <div class="dropdown">
-              <a class="nav-item nav-link dropdown-toggle" href="/property-types/" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Property Types
+              <a class="nav-item nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Event Types
               </a>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                  {% for event_type in events_types %}
+                      <a class="dropdown-item" href="/event-type/{{ event_type.id }}">{{ event_type.name }}</a>
+                  {% endfor %}
               </div>
             </div>
-          <a class="nav-item nav-link" href="/merchants/">Merchants</a>
-          <a class="nav-item nav-link" href="#">About</a>
-          <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-item nav-link" href="{% url 'view_merchants' %}">Merchants</a>
+          <a class="nav-item nav-link" href="{% url 'view_about' %}">About</a>
         </div>
       </div>
   </div>
@@ -111,7 +110,7 @@
         </ul>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-            <form action="/accounts/login/" method="post">
+            <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
                 {% for field in user_authentication_form %}
                     <p>
@@ -129,7 +128,7 @@
                </form>
           </div>
           <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-              <form action="/accounts/signup/" method="post">
+              <form action="{% url 'signup' %}" method="post">
                 {% csrf_token %}
                 {% for field in user_creation_form %}
                     <p>

@@ -43,19 +43,18 @@
     </div>
 
     <div class="container" style="padding: 0 0;">
-        <h2 style="padding-top: 20px; padding-bottom: 20px;">Millions of homes, big or small… and you thought we only did hotels</h2>
+        <h2 style="padding-top: 20px; padding-bottom: 20px;">Millions of different categories just for you</h2>
         <div class="card-deck">
-            {% for property_type in property_types %}
+            {% for event_type in events_types %}
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="{{ property_type.images.url }}" class="card-img" alt="{{ property_type.name }}">
+                            <h5 class="card-title">{{ event_type.name }}</h5>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">{{ property_type.name }}</h5>
-                                <p class="card-text">{{ property_type.description }}</p>
-                                <a class="card-link" href="property-type/{{ property_type.id }}">View properties under {{ property_type.name }}</a>
+                                <p class="card-text">{{ event_type.description }}</p>
+                                <a class="card-link" href="{% url 'view_event_type' pk=event_type.id %}">View events under {{ event_type.name }}</a>
                             </div>
                         </div>
                     </div>
@@ -63,17 +62,19 @@
             {% endfor %}
         </div>
 
-        <h2 style="padding-top: 20px; padding-bottom: 20px;">Properties available to your taste</h2>
+        <h2 style="padding-top: 20px; padding-bottom: 20px;">Upcoming events</h2>
         <div class="card-deck">
-            {% for property in properties %}
-                <div class="card bg-dark text-white">
-                  <img src="{{ property.images.url }}" class="card-img" alt="{{ property.name }}">
-                  <div class="card-img-overlay">
-                    <h5 class="card-title">{{ property.name }}</h5>
-                    <p class="card-text">{{ property.price }}</p>
-                    <p class="card-text">{{ property.status }}</p>
-                    <p class="card-text">{{ property.location.name }}</p>
-                      <img src="{{ property.location.flag }}" alt="{{ property.location.name }}">
+            {% for event in events %}
+                <div class="card" style="width: 18rem;">
+                  <img src="{{ event.images.url }}" class="card-img-top" alt="{ event.name }}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ event.name }}</h5>
+                    <p class="card-text">{{ event.description }}</p>
+                  </div>
+                    <hr>
+                  <div class="card-body">
+                    <a href="{% url 'view_event' pk=event.id %}" class="card-link">View Details</a>
+                    <a href="#" class="card-link">Add to cart</a>
                   </div>
                 </div>
             {% endfor %}
