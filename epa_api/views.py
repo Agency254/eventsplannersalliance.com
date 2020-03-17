@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -6,17 +7,24 @@ from rest_framework.parsers import JSONParser
 from rest_framework.request import Request
 
 from epa_frontend.models import Profile, Events, Merchants, EventsType
-from epa_api.serializers import UserSerializer, EventsSerializer, MerchantsSerializer, EventsTypeSerializer
+from epa_api.serializers import UserSerializer, EventsSerializer, MerchantsSerializer, EventsTypeSerializer, \
+    ProfileSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class ProfileListView(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class UserListView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class EventsListView(viewsets.ModelViewSet):
     queryset = Events.objects.all()
     serializer_class = EventsSerializer
+    lookup_field = 'slug'
 
 
 class MerchantsListView(viewsets.ModelViewSet):
@@ -27,6 +35,7 @@ class MerchantsListView(viewsets.ModelViewSet):
 class EventsTypeListView(viewsets.ModelViewSet):
     queryset = EventsType.objects.all()
     serializer_class = EventsTypeSerializer
+
 # @csrf_exempt
 # def event_detail(request, pk):
 #     """
