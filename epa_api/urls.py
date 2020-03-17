@@ -5,12 +5,13 @@ from rest_framework import routers
 from epa_api import views
 
 # Routers provide an easy way of automatically determining the URL conf.
-from epa_api.views import UserViewSet, EventsListView, MerchantsListView
+from epa_api.views import UserViewSet, EventsListView, MerchantsListView, EventsTypeListView
 
 router = routers.DefaultRouter()
 router.register(r'events', EventsListView)
 router.register(r'merchants', MerchantsListView)
 router.register(r'users', UserViewSet)
+router.register(r'events-type', EventsTypeListView)
 
 urlpatterns = [
     path('api/', include(router.urls), name='api'),
