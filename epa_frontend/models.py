@@ -81,6 +81,11 @@ class Events(models.Model):
     end_date = models.DateField(default=datetime.now)
     location = CountryField(blank_label='(Select Country')
     published = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=False)
+    is_recommended = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_at', 'is_featured', 'is_recommended']
 
 
 class Orders(models.Model):
