@@ -7,6 +7,7 @@ from epa_core import settings
 
 urlpatterns = [
     path("", include("epa_frontend.urls")),
+    path("", include("epa_api.urls")),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls'))
 ]
