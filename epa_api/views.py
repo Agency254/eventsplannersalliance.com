@@ -5,8 +5,8 @@ from rest_framework import viewsets, routers
 from rest_framework.parsers import JSONParser
 from rest_framework.request import Request
 
-from epa_frontend.models import Profile, Events, Merchants
-from epa_api.serializers import UserSerializer, EventsSerializer, MerchantsSerializer
+from epa_frontend.models import Profile, Events, Merchants, EventsType
+from epa_api.serializers import UserSerializer, EventsSerializer, MerchantsSerializer, EventsTypeSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -22,6 +22,11 @@ class EventsListView(viewsets.ModelViewSet):
 class MerchantsListView(viewsets.ModelViewSet):
     queryset = Merchants.objects.all()
     serializer_class = MerchantsSerializer
+
+
+class EventsTypeListView(viewsets.ModelViewSet):
+    queryset = EventsType.objects.all()
+    serializer_class = EventsTypeSerializer
 # @csrf_exempt
 # def event_detail(request, pk):
 #     """
