@@ -65,7 +65,7 @@ class EventsType(models.Model):
 
 class Events(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=250)
     description = models.TextField(max_length=1000)
     images = models.ImageField(upload_to='properties/')
     merchant_id = models.ForeignKey(
