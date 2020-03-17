@@ -67,7 +67,7 @@ class Events(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250)
     description = models.TextField(max_length=1000)
-    images = models.ImageField(upload_to='properties/')
+    images = models.ImageField(upload_to='events/')
     merchant_id = models.ForeignKey(
         Merchants,
         on_delete=models.CASCADE,
