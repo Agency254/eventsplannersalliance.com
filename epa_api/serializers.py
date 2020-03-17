@@ -6,7 +6,7 @@ from rest_framework import routers, serializers, viewsets
 from epa_frontend.models import Profile, Events, EventsType, Merchants
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Profile
         related_models = User
@@ -18,6 +18,21 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         Create and return a new `Profile` instance, given the validated data.
         """
         return Profile.objects.create(**validated_data)
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        related_models = Profile
+        fields = [
+            'username', 'first_name', 'last_name'
+
+        ]
+        lookup_field = 'username'
+        extra_kwargs = {
+            'url': {'lookup_field': 'username'}
+        }
+        depth = 1
 
 
 class EventsSerializer(serializers.HyperlinkedModelSerializer):
@@ -43,6 +58,10 @@ class EventsSerializer(serializers.HyperlinkedModelSerializer):
             'is_featured',
             'is_recommended',
         ]
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
         depth = 1
 
     def create(self, validated_data):
