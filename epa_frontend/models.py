@@ -14,6 +14,9 @@ class Profile(models.Model):
     user_icon = models.ImageField(null=True, blank=True, upload_to='images/', default="images/nerd.png")
     country_code = CountryField(blank_label='(select country)', default='KE')
 
+    def __str__(self):
+        return self.user.username
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -40,6 +43,8 @@ class Merchants(models.Model):
         default=1
     )
 
+    def __str__(self):
+        return self.merchant_name
     # TODO:think about merchant subscription and how to pay for it
 
 
@@ -53,6 +58,9 @@ class EventsType(models.Model):
         related_name="merchant_information",
         db_column='merchant_id'
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Events(models.Model):
@@ -83,6 +91,12 @@ class Events(models.Model):
     published = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     is_recommended = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+    def save_event(self):
+        return self.save()
 
     class Meta:
         ordering = ['created_at', 'is_featured', 'is_recommended']
