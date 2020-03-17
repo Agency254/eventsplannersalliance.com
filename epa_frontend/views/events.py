@@ -20,7 +20,6 @@ def view_events(request):
 
 def view_event(request, pk):
     event = Events.objects.get(pk=pk)
-    print(event.merchant_id)
     # merchant = Merchants.objects.filter(pk=event.merchant_id)
     user_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
@@ -57,7 +56,6 @@ def publish_event(request):
 @login_required
 def view_event_dashboard(request, pk):
     event = Events.objects.get(pk=pk)
-    print(event.merchant_id)
     # merchant = Merchants.objects.filter(pk=event.merchant_id)
     user_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
