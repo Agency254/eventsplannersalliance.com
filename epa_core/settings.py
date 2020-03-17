@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'epa_frontend',
+    'epa_api',
+    'epa_cart',
     'django_countries',
     'djmoney',
     'crispy_forms',
