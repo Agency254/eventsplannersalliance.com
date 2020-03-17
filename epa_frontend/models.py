@@ -58,7 +58,7 @@ class EventsType(models.Model):
 class Events(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=1000)
+    description = models.TextField(max_length=1000)
     images = models.ImageField(upload_to='properties/')
     merchant_id = models.ForeignKey(
         Merchants,
@@ -76,6 +76,8 @@ class Events(models.Model):
     number_of_tickets = models.IntegerField(default=0)
     tickets_sold = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=datetime.now)
+    start_date = models.DateField(default=datetime.now)
+    end_date = models.DateField(default=datetime.now)
     location = CountryField(blank_label='(Select Country')
     published = models.BooleanField(default=False)
 
