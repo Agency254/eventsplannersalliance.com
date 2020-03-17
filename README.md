@@ -1,8 +1,8 @@
 # Events Planners
-#### A site that functions like bookings.com
+#### A site that is used to host events.
 
 ## Description
-A web application that that helps people find their new rental homes
+A web application that that helps people find events
 
 [Behaviour Specifications](specs.md)
 
@@ -29,7 +29,7 @@ A web application that that helps people find their new rental homes
 
 #### Clone the Repo and enter the project folder.
 ```bash
-git clone git@github.com:Agency254/eventsplannersalliance.com.git && cd eventsplannersalliance.com
+git clone git@github.com:newtonkiragu/events.git && cd events
 ```
 
 #### Create and activate the virtual environment
@@ -75,4 +75,4 @@ Open [localhost:8000](http://127.0.0.1:8000/)
 Please read this [comprehensive guide](https://opensource.guide/how-to-contribute/) on how to contribute. Pull requests are welcome!
 
 ## Bugs
-No known bugs if a bug is found create an issue in the [issues section](https://github.com/Agency254/eventsplannersalliance.com/issues) of the repository.
+No known bugs if a bug is found create an issue in the [issues section](https://github.com/newtonkiragu/events/issues) of the repository.
