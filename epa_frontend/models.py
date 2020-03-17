@@ -73,6 +73,7 @@ class Events(models.Model):
         db_column='event_type_id'
     )
     price = MoneyField(max_digits=14, decimal_places=2, default_currency='KES')
+    slug = models.SlugField(null=True, unique=True)
     number_of_tickets = models.IntegerField(default=0)
     tickets_sold = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=datetime.now)
