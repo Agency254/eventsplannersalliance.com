@@ -71,3 +71,16 @@ class MerchantsSerializer(serializers.HyperlinkedModelSerializer):
         Create and return a new `Merchant` instance, given the validated data.
         """
         return Merchants.objects.create(**validated_data)
+
+
+class EventsTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = EventsType
+        related_models = Merchants
+        fields = [
+            'id',
+            'name',
+            'description',
+            'merchant_id'
+        ]
+        depth = 1
