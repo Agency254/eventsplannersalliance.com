@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'epa_frontend',
     'django_countries',
     'djmoney',
-    'crispy_forms'
+    'crispy_forms',
+    'rest_framework',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/'
