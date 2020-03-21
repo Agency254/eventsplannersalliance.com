@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
@@ -11,12 +12,12 @@ from epa_api.serializers import UserSerializer, EventsSerializer, MerchantsSeria
     ProfileSerializer
 
 
-class ProfileListView(viewsets.ModelViewSet):
+class ProfileListView(viewsets.ModelViewSet, LoginRequiredMixin):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
 
-class UserListView(viewsets.ModelViewSet):
+class UserListView(viewsets.ModelViewSet, LoginRequiredMixin):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
