@@ -80,6 +80,7 @@ class Events(models.Model):
         related_name="event_type_information",
         db_column='event_type_id'
     )
+    is_free = models.BooleanField(default=False)
     price = MoneyField(max_digits=14, decimal_places=2, default_currency='KES')
     slug = models.SlugField(null=True, unique=True)
     number_of_tickets = models.IntegerField(default=0)
@@ -98,33 +99,13 @@ class Events(models.Model):
     def save_event(self):
         return self.save()
 
+    def get_published_events():
+        events = Events.objects.filter(published=True)
+        return events
+
+    def get_unpublished_events():
+        events = Events.objects.filter(published=False)
+        return events
+
     class Meta:
         ordering = ['created_at', 'is_featured', 'is_recommended']
-
-
-class Orders(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name="user_information",
-        db_column='user_id'
-    )
-    status = models.CharField(max_length=50, choices=[
-        ("paid", "paid"),
-        ("unpaid", "unpaid")
-    ])
-    created_at = models.DateTimeField(default=datetime.now)
-
-
-class OrderItems(models.Model):
-    order = models.ForeignKey(Orders, on_delete=models.CASCADE, related_name="order_details")
-    event_id = models.ForeignKey(
-        Events,
-        on_delete=models.CASCADE,
-        related_name="event_details",
-        db_column='event_id',
-        default=0
-    )
-    start_of_stay = models.DateTimeField(default=datetime.now)
-    end_of_stay = models.DateTimeField(default=datetime.now)
