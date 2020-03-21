@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
@@ -7,6 +8,7 @@ from rest_framework import viewsets, routers
 from rest_framework.parsers import JSONParser
 from rest_framework.request import Request
 
+from epa_api.filtersets import EventsFilter
 from epa_frontend.models import Profile, Events, Merchants, EventsType
 from epa_api.serializers import UserSerializer, EventsSerializer, MerchantsSerializer, EventsTypeSerializer, \
     ProfileSerializer
@@ -26,6 +28,8 @@ class EventsListView(viewsets.ModelViewSet):
     queryset = Events.objects.all()
     serializer_class = EventsSerializer
     lookup_field = 'slug'
+    filter_backends = [DjangoFilterBackend]
+    filter_class = EventsFilter
 
 
 class MerchantsListView(viewsets.ModelViewSet):
