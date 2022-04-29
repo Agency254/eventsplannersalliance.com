@@ -13,6 +13,7 @@ from epa_frontend.models import Merchants, EventsType, Events
 def create_merchant(request):
     current_user = request.user
     current_user_merchants = Merchants.objects.filter(admin_id=current_user.profile.id)
+    current_merchant = [e for e in current_user_merchants]
     events_types = EventsType.objects.all()
     if request.method == 'POST':
         merchant_form = MerchantForm(request.POST)
@@ -22,7 +23,7 @@ def create_merchant(request):
             merchant_form.created_at = datetime.now
             merchant_form.save()
             messages.success(request, 'The new merchant has been created succesfully')
-            return redirect('properties')
+            return redirect('view_merchant', pk=current_merchant[0].id)
         else:
             messages.error(request, 'please correct the mistakes below')
     else:
