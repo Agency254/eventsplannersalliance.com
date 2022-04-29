@@ -2,6 +2,9 @@
 
 {% block content %}
     <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
-    <h1>TODO: //create list showing events falling under event category</h1>
+        <h1>Events under {{ event_type.name }}:</h1>
+
+        {% include 'events/event_card.html' %}
+
     </div>
 {% endblock %}
