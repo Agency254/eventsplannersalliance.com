@@ -48,12 +48,15 @@ Create a database on your local machine
 Create a `.env` file and paste paste the following filling where appropriate:
 ```
 SECRET_KEY='<secret_key>'
-DB_NAME='<db name>'
-DB_USER='<db username>'
-DB_PASSWORD='<db password>'
-DB_HOST='<db host>'
-DB_PORT='<db port>'
-DEBUG=<boolean>
+DB_NAME='events'
+DB_USER='karanu'
+DB_PASSWORD='yorokobi'
+DB_HOST='localhost'
+DB_PORT='5432'
+DEBUG=True
+ALLOWED_HOSTS='*'
+MODE='dev'
+
 ```
 
 #### Install dependancies
