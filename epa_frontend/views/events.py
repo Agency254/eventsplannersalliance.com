@@ -18,12 +18,12 @@ def view_events(request):
     })
 
 
-def view_event(request, pk):
-    event = Events.objects.get(pk=pk)
+def view_event(request, slug):
+    event = Events.objects.get(slug=slug)
     # merchant = Merchants.objects.filter(pk=event.merchant_id)
     user_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
-    events_types = EventsType.objects.all()
+    events_types = EventsType.objects.filter(event_type_information__published=True)
     return render(request, 'events/event.html', {
         "event": event,
         # "merchant": merchant,
@@ -54,8 +54,8 @@ def publish_event(request):
 
 
 @login_required
-def view_event_dashboard(request, pk):
-    event = Events.objects.get(pk=pk)
+def view_event_dashboard(request, slug):
+    event = Events.objects.get(slug=slug)
     # merchant = Merchants.objects.filter(pk=event.merchant_id)
     user_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
