@@ -32,7 +32,7 @@ def update_event_type(request, pk):
 
 def view_event_type(request, pk):
     event_type = EventsType.objects.get(pk=pk)
-    events = Events.objects.filter(event_type_id=event_type.id)
+    events = Events.objects.filter(event_type_id=event_type.id, published=True)
     user_form = UserCreationForm()
     user_authentication_form = AuthenticationForm()
     events_types = EventsType.objects.all()
