@@ -13,7 +13,7 @@ def home(request):
     current_user = User.username
     events_types = EventsType.objects.all()
     print(events_types)
-    events = Events.objects.all()
+    events = Events.get_published_events()
     return render(request, 'index.html', {
         "profile_form": profile_form,
         "user_creation_form": user_creation_form,
