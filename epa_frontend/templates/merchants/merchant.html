@@ -8,6 +8,8 @@
                 <p>Location: {{ merchant.country_code.name }}</p>
             </div>
             <div class="col">
+                <button class="btn btn-outline-dark my-2 my-sm-0" onclick="window.location.href = '{% url 'update_merchant' pk=merchant.id %}';">Update Merchant Details</button>
+                <br><br>
                 <button class="btn btn-outline-dark my-2 my-sm-0" onclick="window.location.href = '{% url 'create_events' %}';">Create event</button>
 
 
@@ -18,6 +20,13 @@
         <div class="card-deck">
             {% for event in events %}
                 <div class="card" style="width: 18rem;">
+                    {% if event.published %}
+                        <div class="card-header">
+                            Published
+                            <a href="{% url 'un_publish_event' slug=event.slug %}?next={{ request.path }}" class="btn btn-success">Un Publish Event</a>
+                            <a href="{% url 'edit_event' slug=event.slug %}" class="btn btn-success">Edit Event</a>
+                        </div>
+                    {% endif %}
                   <img src="{{ event.images.url }}" class="card-img-top" alt="{ event.name }}">
                   <div class="card-body">
                     <h5 class="card-title">{{ event.name }}</h5>
@@ -36,8 +45,12 @@
                     </li>
                   </ul>
                   <div class="card-body">
-                    <a href="/event/{{ event.id }}" class="card-link">View Details</a>
+                    <a href="{% url 'view_event' slug=event.slug %}" class="card-link">View Details</a>
+
                     <a href="#" class="card-link">Add to cart</a>
+                      {% if not event.published %}
+                          <a href="{% url 'publish_event' slug=event.slug %}?next={{ request.path }}" class="btn btn-success">Publish Event</a>
+                      {% endif %}
                   </div>
                 </div>
             {% endfor %}
