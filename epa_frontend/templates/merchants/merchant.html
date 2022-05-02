@@ -20,12 +20,16 @@
         <div class="card-deck">
             {% for event in events %}
                 <div class="card" style="width: 18rem;">
-                    {% if event.published %}
-                        <div class="card-header">
-                            Published
-                            <a href="{% url 'un_publish_event' slug=event.slug %}?next={{ request.path }}" class="btn btn-success">Un Publish Event</a>
-                            <a href="{% url 'edit_event' slug=event.slug %}" class="btn btn-success">Edit Event</a>
-                        </div>
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.profile.pk == merchant.admin_id.id %}
+                            {% if event.published %}
+                                <div class="card-header">
+                                    Published
+                                    <a href="{% url 'un_publish_event' slug=event.slug %}?next={{ request.path }}" class="btn btn-success">Un Publish Event</a>
+                                    <a href="{% url 'edit_event' slug=event.slug %}" class="btn btn-success">Edit Event</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
                   <img src="{{ event.images.url }}" class="card-img-top" alt="{ event.name }}">
                   <div class="card-body">
@@ -48,9 +52,13 @@
                     <a href="{% url 'view_event' slug=event.slug %}" class="card-link">View Details</a>
 
                     <a href="#" class="card-link">Add to cart</a>
-                      {% if not event.published %}
-                          <a href="{% url 'publish_event' slug=event.slug %}?next={{ request.path }}" class="btn btn-success">Publish Event</a>
-                      {% endif %}
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.profile.pk == merchant.admin_id.id %}
+                            {% if not event.published %}
+                                <a href="{% url 'publish_event' slug=event.slug %}?next={{ request.path }}" class="btn btn-success">Publish Event</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
                   </div>
                 </div>
             {% endfor %}
