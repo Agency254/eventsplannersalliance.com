@@ -49,8 +49,8 @@ Create a `.env` file and paste paste the following filling where appropriate:
 ```
 SECRET_KEY='<secret_key>'
 DB_NAME='events'
-DB_USER='karanu'
-DB_PASSWORD='yorokobi'
+DB_USER='<username>'
+DB_PASSWORD='<paswword>'
 DB_HOST='localhost'
 DB_PORT='5432'
 DEBUG=True
