@@ -1,5 +1,6 @@
 # Events Planners
 #### A site that is used to host events.
+[![CodeQL](https://github.com/newtonkiragu/events/actions/workflows/codeql.yml/badge.svg)](https://github.com/newtonkiragu/events/actions/workflows/codeql.yml)
 
 ## Description
 A web application that that helps people find events
@@ -56,11 +57,11 @@ DB_PORT='5432'
 DEBUG=True
 ALLOWED_HOSTS='*'
 MODE='dev'
-
+SENDGRID_API_KEY='yourapikey'
 ```
 
-#### Install dependancies
-Install dependancies that will create an environment for the app to run
+#### Install dependencies
+Install dependencies that will create an environment for the app to run
 `pip install -r requirements.txt`
 
 #### Run migrations
