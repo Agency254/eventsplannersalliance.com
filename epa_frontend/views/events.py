@@ -56,6 +56,7 @@ def edit_event(request):
 
 @login_required
 def publish_event(request, slug):
+    # TODO: Send SMS when event is published
     event = Events.objects.get(slug=slug)
     event.published = True
     event.save(update_fields=['published'])
@@ -66,6 +67,7 @@ def publish_event(request, slug):
 
 @login_required
 def un_publish_event(request, slug):
+    # TODO: Send SMS when event is unpublished
     event = Events.objects.get(slug=slug)
     event.published = False
     event.save(update_fields=['published'])
