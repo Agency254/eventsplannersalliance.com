@@ -7,7 +7,7 @@
           <li>Username: {{ user.username }}</li>
           <li>Bio: {{ profile.bio }}</li>
         </ul>
-            <img src="{{ profile.user_icon.url }}">
-        <a href="/accounts/profile/update" class="btn btn-outline-dark">Update Profile</a>
+            <img src="{{ profile.user_icon.url }}" alt="{{ user.username }}">
+        <a href="{% url 'update_profile' %}" class="btn btn-outline-dark">Update Profile</a>
     </div>
 {% endblock %}
