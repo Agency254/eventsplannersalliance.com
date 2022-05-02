@@ -4,7 +4,7 @@
     <div class="container" style="padding-top: 160px; padding-left: 0; padding-right: 0;">
         <h2>{{ current_merchant.merchant_name }}</h2>
 
-        <form action="/merchant/{{ current_merchant.id }}/update/" method="post" >
+        <form action="{% url 'update_merchant' current_merchant.id %}" method="post" >
             {% csrf_token %}
             {% for field in merchant_form %}
                 <p>
